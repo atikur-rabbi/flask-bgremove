@@ -1,0 +1,41 @@
+<head>
+    <title>Background Remover App</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{ dropzone.load() }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }}
+</head>
+
+<body>
+	<div class="container">
+		<h1>Upload your images!</h1>
+		<label for="bnw">Black and White</label><input type="checkbox" name="bnw" value="bnw" id="bnw">
+		{{ dropzone.create(action_view='bg_remove') }}
+	</div>
+	<script>
+		var data;
+		$("#bnw").change(function() {
+			if(this.checked) {
+				data = {"bnw": "True"}
+				switch_env("#bnw")
+			} else {
+				data = {"bnw": "False"}
+				switch_env("#bnw")
+			}
+		});
+		function switch_env(element) {
+			$.ajax({
+				type: "POST",
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				url: "/switch/config",
+				dataType: "json",
+				success: function(data) { 
+					console.log(data);                    
+				},
+				error: function(jqXHR) {
+					console.log(jqXHR);
+				}
+			})
+		}
+	</script>
+</body>

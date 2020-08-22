@@ -1,0 +1,25 @@
+{
+    "name": "Background Remover PyTorch",
+    "description": "Background Remover PyTorch",
+    "repository": "https://github.com/pawanpaudel93/flask-pytorch-background-remover",
+    "logo": "https://raw.githubusercontent.com/pawanpaudel93/flask-pytorch-background-remover/master/static/flask-pytorch.jpeg",
+    "keywords": ["flask", "pytorch", "background-remover"],
+    "buildpacks": [
+      {
+        "url": "heroku/python"
+      },
+      {
+        "url": "https://github.com/heroku/heroku-buildpack-apt"
+      }
+    ],
+    "env": {
+        "SECRET_KEY": {
+            "description": "Flask app Secret key",
+            "generator": "secret"
+        },
+        "RESIZETO": {
+            "description": " Desired output size. If size is a sequence like (h, w), output size will be matched to this. If size is an int, smaller edge of the image will be matched to this number. i.e, if height > width, then image will be rescaled to (size * height / width, size).",
+            "value": "144"
+        }
+    }
+}
